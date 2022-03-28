@@ -6,13 +6,14 @@
   "dependencies": {
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "express-handlebars": "^6.0.3"
+    "express-handlebars": "^6.0.3",
+    "mongoose": "^6.2.8"
   },
   "devDependencies": {},
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "seed": "node",
+    "seed": "node ./models/seeds/expenseSeeds.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
