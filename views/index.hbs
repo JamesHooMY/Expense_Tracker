@@ -39,11 +39,11 @@
               {{this.name}}
               {{this.amount}}</div>
             <div class='p-2 bd-highlight col-2'><a
-                href='#'
+                href='/expenses/{{this._id}}/edit'
                 class='btn'
               >修改</a></div>
             <div class='p-2 bd-highlight col-2'>
-              <form action='#'>
+              <form action='/expenses/{{this._id}}/delete' method='POST'>
                 <button type='submit' class='btn bg-white'>刪除</button>
               </form>
             </div>
