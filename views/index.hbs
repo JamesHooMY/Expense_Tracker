@@ -1,8 +1,8 @@
 {{! grid system }}
-<div class='container mt-3 mb-3'>
+<div class='container mt-3'>
   {{! dropdown list }}
   <div class='row mb-3'>
-    <div class='btn-group col'>
+    <div class='btn-group col-4'>
       <button
         class='btn btn-secondary dropdown-toggle rounded-0'
         type='button'
@@ -22,27 +22,27 @@
     </div>
   </div>
 
-  <div class='row justify-content-md-center mb-3'>
-    <div class='btn-group col'>
+  <div class='row mb-3'>
+    <div class='col-8'>
       總金額
     </div>
   </div>
 
-  {{! totalAmount list }}
-  <div class='row justify-content-md-center'>
+  <div class='row mb-3'>
     <ul class='list-group col'>
       {{#each expenses}}
-        <li class='list-group-item rounded-0 border-0 bg-light text-dark'>
-          <div
-            class='d-flex flex-row align-items-center bd-highlight mb-3 justify-content-md-center'
-          >
-            <div class='p-2 bd-highlight'><a href='http://'></a><i
-                class='fa-solid fa-house'
-              ></i>
+        <li class='list-group-item rounded-0 border-0'>
+          <div class='d-flex flex-row align-items-center bd-highlight mb-3'>
+            <div class='p-2 bd-highlight col-8 bg-light text-dark'><a
+                href='http://'
+              ></a><i class='fa-solid fa-house'></i>
               {{this.name}}
               {{this.amount}}</div>
-            <div class='p-2 bd-highlight'><a href='#' class='btn'>修改</a></div>
-            <div class='p-2 bd-highlight'>
+            <div class='p-2 bd-highlight col-2'><a
+                href='#'
+                class='btn'
+              >修改</a></div>
+            <div class='p-2 bd-highlight col-2'>
               <form action='#'>
                 <button type='submit' class='btn bg-white'>刪除</button>
               </form>
@@ -51,5 +51,11 @@
         </li>
       {{/each}}
     </ul>
+  </div>
+
+  <div class='row mb-3'>
+    <div class='col d-flex justify-content-center'>
+      <a href='/expenses/new' class='btn btn-primary'>新增項目</a>
+    </div>
   </div>
 </div>
