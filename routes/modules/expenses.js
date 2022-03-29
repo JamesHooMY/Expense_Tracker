@@ -14,9 +14,17 @@ router.post('/new', (req, res) => {
 
 router.get('/:expense_id/edit', async (req, res) => {
   const expense_id = req.params.expense_id
-  const expense = await Expense.findById({ _id: expense_id }).lean()
+  const expense = await Expense.findOne({ _id: expense_id }).lean()
   // console.log(expense)
   res.render('edit', { expense })
+})
+
+// here
+router.post('/:expense_id/edit', async (req, res) => {
+  const expense_id = req.params.expense_id
+  const expense = req.body
+  await Expense.findOneAndUpdate({ _id: expense_id }, expense)
+  res.redirect('/')
 })
 
 router.post('/:expense_id/delete', async (req, res) => {
