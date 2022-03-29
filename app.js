@@ -2,7 +2,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const routes = require('./routes/index')
 const session = require('express-session')
-
+const usePassport = require('./config/passport')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -22,6 +22,8 @@ app.use(
     saveUninitialized: true,
   })
 )
+usePassport(app)
+
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(routes)
