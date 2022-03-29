@@ -1,1 +1,55 @@
-<h1>index !!!</h1>
+{{! grid system }}
+<div class='container mt-3 mb-3'>
+  {{! dropdown list }}
+  <div class='row mb-3'>
+    <div class='btn-group col'>
+      <button
+        class='btn btn-secondary dropdown-toggle rounded-0'
+        type='button'
+        id='dropdownMenuButton'
+        data-bs-toggle='dropdown'
+        aria-expanded='false'
+      >
+        類別
+      </button>
+      <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+        <li><a class='dropdown-item' href='#'>家居物業</a></li>
+        <li><a class='dropdown-item' href='#'>交通出行</a></li>
+        <li><a class='dropdown-item' href='#'>休閒娛樂</a></li>
+        <li><a class='dropdown-item' href='#'>餐飲食品</a></li>
+        <li><a class='dropdown-item' href='#'>其他</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class='row justify-content-md-center mb-3'>
+    <div class='btn-group col'>
+      總金額
+    </div>
+  </div>
+
+  {{! totalAmount list }}
+  <div class='row justify-content-md-center'>
+    <ul class='list-group col'>
+      {{#each expenses}}
+        <li class='list-group-item rounded-0 border-0 bg-light text-dark'>
+          <div
+            class='d-flex flex-row align-items-center bd-highlight mb-3 justify-content-md-center'
+          >
+            <div class='p-2 bd-highlight'><a href='http://'></a><i
+                class='fa-solid fa-house'
+              ></i>
+              {{this.name}}
+              {{this.amount}}</div>
+            <div class='p-2 bd-highlight'><a href='#' class='btn'>修改</a></div>
+            <div class='p-2 bd-highlight'>
+              <form action='#'>
+                <button type='submit' class='btn bg-white'>刪除</button>
+              </form>
+            </div>
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
