@@ -21,15 +21,16 @@ router.get('/', async (req, res) => {
       .lean()
       .sort({ date: -1 })
 
-    expenses.forEach(expense => {
+    expenses.forEach((expense, expenseIndex) => {
       totalAmount += Number(expense.amount)
       expense.categoryName = name
       expense.categoryIcon = icon
+      expense.bgColor = expenseIndex % 2 === 0 ? '#adb5bd' : ''
     })
     res.render('index', { expenses, categories })
   } else {
     const expenses = await Expense.find({ userId }).lean().sort({ date: -1 })
-    expenses.forEach(expense => {
+    expenses.forEach((expense, expenseIndex) => {
       totalAmount += Number(expense.amount)
       const category = categories.find(
         category =>
@@ -39,6 +40,7 @@ router.get('/', async (req, res) => {
       const { name, icon } = category
       expense.categoryName = name
       expense.categoryIcon = icon
+      expense.bgColor = expenseIndex % 2 === 0 ? '#adb5bd' : ''
     })
     res.render('index', { expenses, categories, totalAmount })
   }

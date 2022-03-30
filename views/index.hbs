@@ -1,8 +1,8 @@
 {{! grid system }}
-<div class='container mt-3'>
+<div class='container mt-3 col-8'>
   {{! dropdown list }}
   <div class='row mb-3'>
-    <div class='col-sm-4'>
+    <div class='col-8'>
       <form action='/'>
         <select
           class='form-select'
@@ -29,8 +29,8 @@
 
   <div class='row mb-3'>
     <div class='col-8 d-flex flex-row justify-content-between'>
-      <div>總金額</div>
-      <div><h1><strong>{{#if
+      <div><strong>總金額：</strong></div>
+      <div><h1 ><strong>{{#if
               totalAmount
             }}{{totalAmount}}{{else}}0{{/if}}</strong></h1></div>
     </div>
@@ -40,38 +40,37 @@
     <ul class='list-group col'>
       {{#each expenses}}
         <li class='list-group-item rounded-0 border-0 p-0'>
-          <div class='d-flex flex-row align-items-center bd-highlight'>
-            <div class='p-2 bd-highlight col-8 bg-light text-dark'>
+          <div class='d-flex flex-row align-items-center'>
+            <div class='py-2 bd-highlight col-8 text-dark' {{#if this.bgColor}} style="background-color:{{this.bgColor}};" {{/if}}>
               <div class='row'>
-                <div class='col d-flex flex-row align-items-center'>
-                  <div><i class='{{this.categoryIcon}} fa-2xl'></i></div>
+                <div class='col d-flex flex-row align-items-center justify-content-center'>
+                  <div><i class='{{this.categoryIcon}} fa-2xl' ></i></div>
                 </div>
                 <div class='col-6'>
-                  <div class='col'>{{this.name}}</div>
-                  <div class='col'>{{this.date}}</div>
+                  <div class='col'><strong>{{this.name}}</strong></div>
+                  <div class='col'><strong>{{this.date}}</strong></div>
                 </div>
-                <div class='col'><h1>{{this.amount}}</h1></div>
+                <div class='col d-flex flex-row align-items-center justify-content-center'><h3 class="m-0 ">{{this.amount}}</h3></div>
               </div>
             </div>
-            <div class='p-2 bd-highlight col-2 d-flex justify-content-center'>
-              <a href='/expenses/{{this._id}}/edit' class='btn'>修改</a>
+            <div class='py-2 bd-highlight col-2 d-flex justify-content-center'>
+              <a href='/expenses/{{this._id}}/edit' class='btn'><strong>修改</strong></a>
             </div>
             <form
               action='/expenses/{{this._id}}/delete'
               method='POST'
               class='col-2 m-0 d-flex align-items-center justify-content-center'
             >
-              <button type='submit' class='btn bg-white'>刪除</button>
+              <button type='submit' class='btn bg-white'><strong>刪除</strong></button>
             </form>
-
           </div>
         </li>
       {{/each}}
     </ul>
   </div>
 
-  <div class='row mb-3'>
-    <div class='col d-flex justify-content-center'>
+  <div class='row mt-5'>
+    <div class='col-8 d-flex justify-content-center'>
       <a href='/expenses/new' class='btn btn-primary'>新增項目</a>
     </div>
   </div>

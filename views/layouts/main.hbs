@@ -6,18 +6,24 @@
     <title>Expense Tracker</title>
     <link rel='stylesheet' href='/css/bootstrap.css' />
     <link rel='stylesheet' href='/css/all.css' />
+    <link rel='stylesheet' href='/css/restaurant.css' />
   </head>
   <body>
 
-    <nav class='navbar navbar-expand-lg navbar-light bg-light'>
+    <nav
+      class='navbar navbar-expand-lg navbar-light'
+      style='background-color: #adb5bd;'
+    >
       <div class='container-fluid'>
         <a class='navbar-brand' href='/'><strong>{{#if
               user
             }}{{user.name}}的{{/if}}家庭記賬本</strong></a>
         {{#if user}}
-          <a class='btn btn-outline-success' href='/users/logout'>登出</a>
+          <a class='btn btn-danger' href='/users/logout'><strong
+            >登出</strong></a>
         {{else}}
-          <a class='btn btn-outline-success' href='/users/login'>登入</a>
+          <a class='btn btn-primary' href='/users/login'><strong
+            >登入</strong></a>
         {{/if}}
       </div>
     </nav>
