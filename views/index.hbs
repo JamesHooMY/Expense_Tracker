@@ -2,23 +2,25 @@
 <div class='container mt-3'>
   {{! dropdown list }}
   <div class='row mb-3'>
-    <div class='btn-group col-4'>
-      <button
-        class='btn btn-secondary dropdown-toggle rounded-0'
-        type='button'
-        id='dropdownMenuButton'
-        data-bs-toggle='dropdown'
-        aria-expanded='false'
-      >
-        類別
-      </button>
-      <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-        <li><a class='dropdown-item' href='#'>家居物業</a></li>
-        <li><a class='dropdown-item' href='#'>交通出行</a></li>
-        <li><a class='dropdown-item' href='#'>休閒娛樂</a></li>
-        <li><a class='dropdown-item' href='#'>餐飲食品</a></li>
-        <li><a class='dropdown-item' href='#'>其他</a></li>
-      </ul>
+    <div class='col-sm-4'>
+      <form action='/'>
+        <select
+          class='form-select'
+          id='category'
+          name='category'
+          onchange='this.form.submit()'
+        >
+          <option>請選擇類別</option>
+          {{#each categories}}
+            <option value='{{this._id}}'>{{this.name}}</option>
+          {{/each}}
+          {{! <option value='家居物業'>家居物業</option>
+          <option value='交通出行'>交通出行</option>
+          <option value='休閒娛樂'>休閒娛樂</option>
+          <option value='餐飲食品'>餐飲食品</option>
+          <option value='其他'>其他</option> }}
+        </select>
+      </form>
     </div>
   </div>
 
@@ -31,22 +33,31 @@
   <div class='row mb-3'>
     <ul class='list-group col'>
       {{#each expenses}}
-        <li class='list-group-item rounded-0 border-0'>
-          <div class='d-flex flex-row align-items-center bd-highlight mb-3'>
-            <div class='p-2 bd-highlight col-8 bg-light text-dark'><a
-                href='http://'
-              ></a><i class='fa-solid fa-house'></i>
-              {{this.name}}
-              {{this.amount}}</div>
-            <div class='p-2 bd-highlight col-2'><a
-                href='/expenses/{{this._id}}/edit'
-                class='btn'
-              >修改</a></div>
-            <div class='p-2 bd-highlight col-2'>
-              <form action='/expenses/{{this._id}}/delete' method='POST'>
-                <button type='submit' class='btn bg-white'>刪除</button>
-              </form>
+        <li class='list-group-item rounded-0 border-0 p-0'>
+          <div class='d-flex flex-row align-items-center bd-highlight'>
+            <div class='p-2 bd-highlight col-8 bg-light text-dark'>
+              <div class='row'>
+                <div class='col d-flex flex-row align-items-center'>
+                  <div><i class='{{this.categoryIcon}} fa-2xl'></i></div>
+                </div>
+                <div class='col-6'>
+                  <div class='col'>{{this.name}}</div>
+                  <div class='col'>{{this.date}}</div>
+                </div>
+                <div class='col'><h1>{{this.amount}}</h1></div>
+              </div>
             </div>
+            <div class='p-2 bd-highlight col-2 d-flex justify-content-center'>
+              <a href='/expenses/{{this._id}}/edit' class='btn'>修改</a>
+            </div>
+            <form
+              action='/expenses/{{this._id}}/delete'
+              method='POST'
+              class='col-2 m-0 d-flex align-items-center justify-content-center'
+            >
+              <button type='submit' class='btn bg-white'>刪除</button>
+            </form>
+
           </div>
         </li>
       {{/each}}

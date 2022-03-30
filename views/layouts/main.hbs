@@ -11,8 +11,14 @@
 
     <nav class='navbar navbar-expand-lg navbar-light bg-light'>
       <div class='container-fluid'>
-        <a class='navbar-brand' href='/'><strong>家庭記賬本</strong></a>
-        <a class='btn btn-outline-success' href='/users/logout'>登出</a>
+        <a class='navbar-brand' href='/'><strong>{{#if
+              user
+            }}{{user.name}}的{{/if}}家庭記賬本</strong></a>
+        {{#if user}}
+          <a class='btn btn-outline-success' href='/users/logout'>登出</a>
+        {{else}}
+          <a class='btn btn-outline-success' href='/users/login'>登入</a>
+        {{/if}}
       </div>
     </nav>
 

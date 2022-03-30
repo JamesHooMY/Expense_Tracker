@@ -6,6 +6,15 @@ module.exports = app => {
   app.use(passport.initialize())
   app.use(passport.session())
 
+  passport.serializeUser((user, done) => {
+    return done(null, user._id)
+  })
+
+  passport.deserializeUser(async (_id, done) => {
+    const user = await User.findById(_id).lean()
+    if (user) return done(null, user)
+  })
+
   passport.use(
     new LocalStrategy(
       { usernameField: 'email' },
@@ -27,12 +36,4 @@ module.exports = app => {
       }
     )
   )
-
-  passport.serializeUser((user, done) => {
-    return done(null, user._id)
-  })
-  passport.deserializeUser(async (_id, done) => {
-    const user = await User.findById(_id).lean()
-    if (user) return done(null, user)
-  })
 }

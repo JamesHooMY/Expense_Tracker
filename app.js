@@ -26,6 +26,11 @@ usePassport(app)
 
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 app.use(routes)
 
 app.listen(port, () => {
