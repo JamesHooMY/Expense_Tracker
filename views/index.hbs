@@ -6,13 +6,16 @@
       <form action='/'>
         <select
           class='form-select'
-          id='category'
-          name='category'
+          id='categoryId'
+          name='categoryId'
           onchange='this.form.submit()'
         >
-          <option>請選擇類別</option>
+          <option value=''>請選擇類別</option>
           {{#each categories}}
-            <option value='{{this._id}}'>{{this.name}}</option>
+            <option
+              value='{{this._id}}'
+              {{this.selected}}
+            >{{this.name}}</option>
           {{/each}}
           {{! <option value='家居物業'>家居物業</option>
           <option value='交通出行'>交通出行</option>
@@ -25,8 +28,11 @@
   </div>
 
   <div class='row mb-3'>
-    <div class='col-8'>
-      總金額
+    <div class='col-8 d-flex flex-row justify-content-between'>
+      <div>總金額</div>
+      <div><h1><strong>{{#if
+              totalAmount
+            }}{{totalAmount}}{{else}}0{{/if}}</strong></h1></div>
     </div>
   </div>
 
