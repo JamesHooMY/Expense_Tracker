@@ -2,7 +2,7 @@
   <div class='col-md-6 m-auto'>
     <div class='card card-body'>
       <h1 class='text-center mt-3'>登入</h1>
-      {{!-- {{> message}} --}}
+      {{> message}}
       <form action='/users/login' method='POST'>
         <div class='form-group mb-3'>
           <label for='email'>帳號</label>
@@ -12,7 +12,7 @@
             name='email'
             class='form-control'
             placeholder='請輸入 Email'
-            {{!-- value="{{email}}" --}}
+            value="{{email}}"
             required
           />
         </div>
@@ -24,7 +24,7 @@
             name='password'
             class='form-control'
             placeholder='請輸入 Password'
-            {{!-- value="{{password}}" --}}
+            value="{{password}}"
             required
           />
         </div>

@@ -13,6 +13,7 @@ router.post(
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/users/login',
+    failureFlash: true, // connect-flash
   })
 )
 
@@ -54,6 +55,7 @@ router.post('/register', async (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', '你已經成功登出。')
   res.redirect('/users/login')
 })
 

@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars')
 const routes = require('./routes/index')
 const session = require('express-session')
 const usePassport = require('./config/passport')
+const flash = require('connect-flash')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -26,9 +27,12 @@ usePassport(app)
 
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
+app.use(flash())
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 app.use(routes)

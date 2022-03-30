@@ -5,7 +5,14 @@ const Category = require('../../models/category')
 
 router.get('/new', async (req, res) => {
   const categories = await Category.find().lean()
-  res.render('new', { categories })
+  let today = new Date()
+  const day = today.getDate().toString()
+  let month = today.getMonth() + 1
+  month = month < 10 ? '0' + month.toString() : month.toString()
+  const year = today.getFullYear().toString()
+  const date = year.concat('-', month, '-', day)
+  // console.log(date)
+  res.render('new', { categories, date })
 })
 
 router.post('/new', (req, res) => {

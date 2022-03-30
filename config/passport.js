@@ -24,14 +24,14 @@ module.exports = app => {
         if (!user) {
           return done(null, false, {
             type: 'warning_msg',
-            message: '這個 email 還未注冊！!',
+            message: `帳號 ${email} 還未注冊!`,
           })
         }
         const isMatch = await bcrypt.compare(password, user.password)
         if (!isMatch) {
           return done(null, false, {
             type: 'warning_msg',
-            message: 'Email 或密碼錯誤！',
+            message: `帳號 ${email} 或密碼錯誤！`,
           })
         }
         return done(null, user)
