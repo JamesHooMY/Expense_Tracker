@@ -6,6 +6,8 @@ const users = require('./users.json').users
 const categories = require('./categories.json').categories
 const expenses = require('./expenses.json').expenses
 
+const bcrypt = require('bcrypt')
+
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -32,7 +34,9 @@ db.once('open', async () => {
       // check duplicate data
       const repeatUser = await User.findOne({ email })
       if (!repeatUser) {
-        await User.create({ name, email, password })
+        const salt = await bcrypt.genSalt(10)
+        const hash = await bcrypt.hash(password, salt)
+        await User.create({ name, email, password: hash })
       }
     })
   )
