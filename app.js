@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const app = express()
-const port = process.env.PORT
+const port = process.env.PORT || 3000
 require('./config/mongoose')
 
 const hbs = exphbs.create({ defaultLayout: 'main', extname: 'hbs' })
