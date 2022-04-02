@@ -7,8 +7,8 @@ router.get('/', async (req, res) => {
   const userId = req.user._id
   const { categoryId } = req.query
   const categories = await Category.find().lean()
-  let totalAmount = 0
   let expenses = []
+  let totalAmount = 0
 
   if (categoryId) {
     const category = categories.find(category => {
@@ -17,30 +17,20 @@ router.get('/', async (req, res) => {
         return category
       }
     })
-    const { name, icon } = category
     expenses = await Expense.find({ userId, categoryId })
+      .populate('categoryId', { icon: 1 })
       .lean()
       .sort({ date: -1 })
-
-    expenses.forEach((expense, expenseIndex) => {
-      totalAmount += Number(expense.amount)
-      expense.categoryName = name
-      expense.categoryIcon = icon
-      expense.bgColor = expenseIndex % 2 === 0 ? '#adb5bd' : ''
-    })
   } else {
-    expenses = await Expense.find({ userId }).lean().sort({ date: -1 })
-    expenses.forEach((expense, expenseIndex) => {
-      totalAmount += Number(expense.amount)
-      const category = categories.find(
-        category => category._id.toString() === expense.categoryId
-      )
-      const { name, icon } = category
-      expense.categoryName = name
-      expense.categoryIcon = icon
-      expense.bgColor = expenseIndex % 2 === 0 ? '#adb5bd' : ''
-    })
+    expenses = await Expense.find({ userId })
+      .populate('categoryId', { icon: 1 })
+      .lean()
+      .sort({ date: -1 })
   }
+  expenses.forEach((expense, expenseIndex) => {
+    totalAmount += Number(expense.amount)
+    expense.bgColor = expenseIndex % 2 === 0 ? '#adb5bd' : ''
+  })
   res.render('index', { expenses, categories, totalAmount })
 })
 

@@ -13,7 +13,6 @@ router.get('/new', async (req, res) => {
   month = month < 10 ? '0' + month.toString() : month.toString()
   const year = today.getFullYear().toString()
   const date = year.concat('-', month, '-', day)
-
   res.render('new', { categories, date })
 })
 
@@ -32,7 +31,7 @@ router.get('/:expense_id/edit', async (req, res) => {
   const categories = await Category.find().lean()
   const { categoryId } = expense
   categories.forEach(category => {
-    if (category._id.toString() === categoryId) {
+    if (category._id.toString() === categoryId.toString()) {
       category.selected = 'selected'
     }
   })
