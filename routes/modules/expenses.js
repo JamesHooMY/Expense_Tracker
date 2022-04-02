@@ -20,7 +20,6 @@ router.get('/new', async (req, res) => {
 router.post('/new', (req, res) => {
   const userId = req.user._id
   const expense = req.body
-  // add userId to expense
   expense.userId = userId
   Expense.create(expense)
   res.redirect('/')
@@ -40,7 +39,7 @@ router.get('/:expense_id/edit', async (req, res) => {
   res.render('edit', { expense, categories })
 })
 
-router.post('/:expense_id/edit', async (req, res) => {
+router.put('/:expense_id', async (req, res) => {
   const userId = req.user._id
   const expense_id = req.params.expense_id
   const expense = req.body
@@ -48,7 +47,7 @@ router.post('/:expense_id/edit', async (req, res) => {
   res.redirect('/')
 })
 
-router.post('/:expense_id/delete', async (req, res) => {
+router.delete('/:expense_id', async (req, res) => {
   const userId = req.user._id
   const expense_id = req.params.expense_id
   await Expense.findOneAndDelete({ _id: expense_id, userId })
