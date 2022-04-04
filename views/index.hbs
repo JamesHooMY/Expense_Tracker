@@ -46,14 +46,33 @@
               </div>
             </div>
             <div class='col-2 bd-highlight d-flex justify-content-center'>
-              <a href='/expenses/{{this._id}}/edit' class='btn' style="color: blue;">修改</a>
+              <a href='/expenses/{{this._id}}/edit' class='btn btn-primary' >修改</a>
             </div>
             <form
               action='/expenses/{{this._id}}?_method=DELETE'
               method='POST'
               class='col-2 m-0 d-flex  '
             >
-              <button type='submit' class='btn' style="color: red;">刪除</button>
+            {{!-- modal button --}}
+              <button type='button' class='btn btn-danger' data-bs-toggle="modal" data-bs-target="#deleteModal" >刪除</button>
+              <!-- Modal -->
+              <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel" style="color: red;">刪除警示！</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      請確認是否要刪除這筆消費記錄？此筆消費記錄刪除後將無法回復！
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                      <button type="submit" class="btn btn-danger">刪除</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </form>
           </div>
       {{/each}}
@@ -65,3 +84,4 @@
     </div>
   </div>
 </div>
+
