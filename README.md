@@ -17,6 +17,9 @@ A web application for recording your daily expenses.
 ## Edit expense
 ![image](https://user-images.githubusercontent.com/87403901/161212685-3f7329c0-ab66-40c7-9c09-be3b8eeff9e0.png)
 
+## Delete reminder
+![image](https://user-images.githubusercontent.com/87403901/161612654-07fc1a26-987d-49d4-a61f-c2802ce71dbb.png)
+
 # Features
 1. Register your own account or using your facebook/google account directly to start create your expense list
 2. All expenses will be summaried on the main page, you can edit or delete them.
