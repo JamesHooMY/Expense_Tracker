@@ -19,8 +19,12 @@
               user
             }}{{user.name}}的{{/if}}記帳本</strong></a>
         {{#if user}}
-          <a class='btn btn-danger' href='/users/logout'><strong
-            >登出</strong></a>
+          <div class='d-fex justify-content-end'>
+            <a class='btn btn-warning' href='/users/changePassword'><strong
+              >更改密碼</strong></a>
+            <a class='btn btn-danger' href='/users/logout'><strong
+              >登出</strong></a>
+          </div>
         {{else}}
           <a class='btn btn-primary' href='/users/login'><strong
             >登入</strong></a>

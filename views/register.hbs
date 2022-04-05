@@ -36,8 +36,8 @@
             name='password'
             class='form-control'
             placeholder='請輸入密碼至少爲 8 碼'
-            pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
-            title='密碼至少爲 8 碼，且必須包含至少 1 個數字，1 個大寫字母和 1 個小寫字母'
+            {{!-- pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
+            title='密碼至少爲 8 碼，且必須包含至少 1 個數字，1 個大寫字母和 1 個小寫字母' --}}
             value='{{password}}'
             required
           />
@@ -50,8 +50,8 @@
             name='confirmPassword'
             class='form-control'
             placeholder='請輸入確認密碼'
-            pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
-            title='密碼至少爲 8 碼，且必須包含至少 1 個數字，1 個大寫字母和 1 個小寫字母'
+            {{!-- pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
+            title='密碼至少爲 8 碼，且必須包含至少 1 個數字，1 個大寫字母和 1 個小寫字母' --}}
             value='{{confirmPassword}}'
             required
           />
