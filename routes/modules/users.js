@@ -4,6 +4,7 @@ const router = express.Router()
 const User = require('../../models/user')
 const bcrypt = require('bcrypt')
 const { authenticator } = require('../../middleware/auth')
+const nodemailer = require('../../config/nodemailer')
 
 router.get('/login', (req, res) => {
   res.render('login')
@@ -101,9 +102,20 @@ router.put('/changePassword', authenticator, async (req, res) => {
 
   const salt = await bcrypt.genSalt(10)
   const hash = await bcrypt.hash(newPassword, salt)
-  await User.findOneAndUpdate({ _id: userId }, { password: hash })
+  await User.findOneAndUpdate({ _id: userId }, { password: hash }) // update password
   req.logout()
   req.flash('success_msg', '密碼更換成功，請重新登入後再使用！')
+  res.redirect('/users/login')
+})
+
+router.get('/forgetPassword', (req, res) => {
+  res.render('forgetPassword')
+})
+
+router.post('/forgetPassword', (req, res) => {
+  const { email } = req.body
+  console.log(email)
+  nodemailer(email)
   res.redirect('/users/login')
 })
 
