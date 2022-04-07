@@ -6,7 +6,8 @@ module.exports = async userEmail => {
     // const transporter = await nodemailer.createTransport({
     //   host: process.env.NODEMAILER_HOST,
     //   port: process.env.NODEMAILER_PORT,
-    //   secure: false, // true for 465, false for other ports
+    //   secure: process.env.NODEMAILER_SECURE,
+    //   requireTLS: true,
     //   auth: {
     //     user: process.env.NODEMAILER_USER, // generated ethereal user
     //     pass: process.env.NODEMAILER_PASSWORD, // generated ethereal password
@@ -14,6 +15,7 @@ module.exports = async userEmail => {
     // })
     const transporter = nodemailer.createTransport({
       service: 'gmail',
+      // secure: false,
       auth: {
         user: process.env.NODEMAILER_USER,
         pass: process.env.NODEMAILER_PASSWORD,
@@ -32,7 +34,7 @@ module.exports = async userEmail => {
 
     // send mail with defined transport object
     let info = await transporter.sendMail(emailContent)
-    console.log(info.response)
+    console.log(info.messageId)
   } catch (err) {
     console.log(err)
   }
