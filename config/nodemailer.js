@@ -2,25 +2,13 @@ const nodemailer = require('nodemailer')
 
 module.exports = async userEmail => {
   try {
-    // create reusable transporter object using the default SMTP transport
-    // const transporter = await nodemailer.createTransport({
-    //   host: process.env.NODEMAILER_HOST,
-    //   port: process.env.NODEMAILER_PORT,
-    //   secure: process.env.NODEMAILER_SECURE,
-    //   requireTLS: true,
-    //   auth: {
-    //     user: process.env.NODEMAILER_USER, // generated ethereal user
-    //     pass: process.env.NODEMAILER_PASSWORD, // generated ethereal password
-    //   },
-    // })
     const transporter = nodemailer.createTransport({
       service: 'gmail',
-      // secure: false,
       auth: {
         user: process.env.NODEMAILER_USER,
         pass: process.env.NODEMAILER_PASSWORD,
       },
-      // tls: { rejectUnauthorized: false },
+      tls: { rejectUnauthorized: false },
     })
 
     // email content
