@@ -27,10 +27,14 @@ router.post('/new', (req, res) => {
 router.get('/:expense_id/edit', async (req, res) => {
   const userId = req.user._id
   const expense_id = req.params.expense_id
-  const expense = await Expense.findOne({ _id: expense_id, userId }).lean()
-  const categories = await Category.find().lean()
+  // const expense = await Expense.findOne({ _id: expense_id, userId }).lean()
+  // const categories = await Category.find().lean()
+  const [expense, categories] = await Promise.all([
+    Expense.findOne({ _id: expense_id, userId }).lean(),
+    Category.find().lean(),
+  ])
   const { categoryId } = expense
-  categories.forEach(category => {
+  categories.forEach((category) => {
     if (category._id.toString() === categoryId.toString()) {
       category.selected = 'selected'
     }

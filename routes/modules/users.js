@@ -48,8 +48,7 @@ router.post('/register', async (req, res) => {
       confirmPassword,
     })
   } else {
-    const salt = await bcrypt.genSalt(10)
-    const hash = await bcrypt.hash(password, salt)
+    const hash = bcrypt.hashSync(password, 10)
     await User.create({ name, email, password: hash })
   }
   res.redirect('/users/login')
@@ -100,8 +99,7 @@ router.put('/changePassword', authenticator, async (req, res) => {
     })
   }
 
-  const salt = await bcrypt.genSalt(10)
-  const hash = await bcrypt.hash(newPassword, salt)
+  const hash = bcrypt.hashSync(newPassword, 10)
   await User.findOneAndUpdate({ _id: userId }, { password: hash }) // update password
   req.logout()
   req.flash('success_msg', '密碼更換成功，請重新登入後再使用！')
