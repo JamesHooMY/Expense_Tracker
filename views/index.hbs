@@ -22,9 +22,16 @@
     </div>
   </div>
   <div class='row mb-3'>
+    <div class="col-8 d-flex justify-content-center">
+      <div style="width: 30vw">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class='row mb-3'>
     <div class='col-8 d-flex flex-row justify-content-between'>
       <div>總金額：</div>
-      <div><h1 >{{#if
+      <div><h1 class="totalAmount">{{#if
               totalAmount
             }}{{totalAmount}}{{else}}0{{/if}}</h1></div>
     </div>
@@ -42,7 +49,7 @@
                   <div class='col'>{{this.name}}</div>
                   <div class='col'>{{this.date}}</div>
                 </div>
-                <div class='col d-flex flex-row align-items-center justify-content-end'><h3 class="m-0 pe-4">{{this.amount}}</h3></div>
+                <div class='col d-flex flex-row align-items-center justify-content-end'><h3 class="m-0 pe-4 expenseAmount" data-category="{{this.categoryId.name}}">{{this.amount}}</h3></div>
               </div>
             </div>
             <div class='col-2 bd-highlight d-flex justify-content-center'>
@@ -85,3 +92,4 @@
   </div>
 </div>
 
+<script src='/js/doughnut-chart.js'></script>

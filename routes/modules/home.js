@@ -11,19 +11,19 @@ router.get('/', async (req, res) => {
   let totalAmount = 0
 
   if (categoryId) {
-    const category = categories.find(category => {
+    const category = categories.find((category) => {
       if (category._id.toString() === categoryId) {
         category.selected = 'selected'
         return category
       }
     })
     expenses = await Expense.find({ userId, categoryId })
-      .populate('categoryId', { icon: 1 })
+      .populate('categoryId', { icon: 1, name: 1 }) // icon: 1，代表 icon: true 僅回傳 icon
       .lean()
       .sort({ date: -1 })
   } else {
     expenses = await Expense.find({ userId })
-      .populate('categoryId', { icon: 1 })
+      .populate('categoryId', { icon: 1, name: 1 })
       .lean()
       .sort({ date: -1 })
   }
@@ -31,6 +31,7 @@ router.get('/', async (req, res) => {
     totalAmount += Number(expense.amount)
     expense.bgColor = expenseIndex % 2 === 0 ? '#adb5bd' : ''
   })
+
   res.render('index', { expenses, categories, totalAmount })
 })
 
