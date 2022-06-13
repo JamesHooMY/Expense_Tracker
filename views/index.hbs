@@ -4,20 +4,19 @@
   <div class='row mb-3'>
     <div class='col-8'>
       <form action='/'>
-        <select
-          class='form-select'
-          id='categoryId'
-          name='categoryId'
-          onchange='this.form.submit()'
-        >
-          <option value=''>請選擇類別</option>
-          {{#each categories}}
-            <option
-              value='{{this._id}}'
-              {{this.selected}}
-            >{{this.name}}</option>
-          {{/each}}
-        </select>
+        <div class="row">
+          <div class="col">
+            <select class='form-select' id='categoryId' name='categoryId' onchange='this.form.submit()'>
+              <option value=''>請選擇類別</option>
+              {{#each categories}}
+                <option value='{{this._id}}'{{this.selected}}>{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="col">
+            <input type="month" class="form-control" id="month" name="month" value="{{month}}" onchange="this.form.submit()">
+          </div>
+        </div>
       </form>
     </div>
   </div>
