@@ -110,11 +110,63 @@ router.get('/forgetPassword', (req, res) => {
   res.render('forgetPassword')
 })
 
-router.post('/forgetPassword', (req, res) => {
-  const { email } = req.body
-  console.log(email)
-  nodemailer(email)
-  res.redirect('/users/login')
+router.post('/forgetPassword', async (req, res) => {
+  try {
+    const { email } = req.body
+    let emailMatch = await User.findOne({ email }).lean()
+    let verifiedCode = ''
+    if (emailMatch) {
+      emailMatch = emailMatch.email
+      const genRanHex = (size) =>
+        [...Array(size)]
+          .map(() => Math.floor(Math.random() * 16).toString(16))
+          .join('')
+      verifiedCode = genRanHex(8)
+      nodemailer(email, verifiedCode)
+    }
+    const warning_msg =
+      '密碼更改鏈接已寄送！請確認 “信箱收件夾” 或 “垃圾郵件” 内是否有相關郵件！'
+
+    res.render('resetPassword', { emailMatch, verifiedCode, warning_msg })
+  } catch (err) {
+    console.error(err)
+  }
+})
+
+router.post('/resetPassword', async (req, res) => {
+  try {
+    const { password, confirmPassword, emailMatch, verifiedCode, verifyCode } =
+      req.body
+    const errors = []
+    if (password !== confirmPassword) {
+      errors.push({ message: '新密碼與確認新密碼不相符 !' })
+      return res.render('resetPassword', {
+        errors,
+        password,
+        confirmPassword,
+        emailMatch,
+        verifiedCode,
+      })
+    } else if (emailMatch && verifiedCode) {
+      if (verifyCode !== verifiedCode) {
+        errors.push({ message: '驗證碼輸入錯誤 !' })
+        return res.render('resetPassword', {
+          errors,
+          password,
+          confirmPassword,
+          emailMatch,
+          verifiedCode,
+        })
+      }
+      const hash = bcrypt.hashSync(password, 10)
+      await User.findOneAndUpdate({ email: emailMatch }, { password: hash })
+    }
+
+    req.flash('success_msg', '密碼更換成功，請重新登入後再使用！')
+    res.redirect('/users/login')
+  } catch (err) {
+    console.error(err)
+  }
 })
 
 module.exports = router

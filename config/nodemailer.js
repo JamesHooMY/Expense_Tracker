@@ -1,9 +1,9 @@
 const nodemailer = require('nodemailer')
 
-module.exports = async userEmail => {
+module.exports = async (userEmail, verifiedCode) => {
   try {
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: 'Outlook365',
       auth: {
         user: process.env.NODEMAILER_USER,
         pass: process.env.NODEMAILER_PASSWORD,
@@ -17,12 +17,11 @@ module.exports = async userEmail => {
       to: userEmail, // list of receivers
       subject: '記帳本忘記密碼', // Subject line
       text: 'Hello world?', // plain text body
-      html: `<b>Hello world?</b>`, // html body
+      html: `<b>驗證碼 ${verifiedCode}</b>`, // html body
     }
 
     // send mail with defined transport object
-    let info = await transporter.sendMail(emailContent)
-    console.log(info.messageId)
+    await transporter.sendMail(emailContent)
   } catch (err) {
     console.log(err)
   }
