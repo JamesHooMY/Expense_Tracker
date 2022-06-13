@@ -1,71 +1,101 @@
-# AC3_A3_expense-tracker
+# Expense Tracker
 A web application for recording your daily expenses.
 
-# Web interface
-## Register page
-![image](https://user-images.githubusercontent.com/87403901/161212313-6b1a8242-3d6e-4e18-a570-5666d239817b.png)
+***
+# Start to use Expense Tracker
+*   Make sure that you have already installed [Node.js](https://nodejs.org/en/)
 
-## Login page
-![image](https://user-images.githubusercontent.com/87403901/161212385-c130a307-d056-4a83-9fa8-1adabdddc229.png)
+1.   Clone this project to your local place from github.
 
-## Main page
-![image](https://user-images.githubusercontent.com/87403901/161212475-fe510cf2-ccb6-4bcf-9e85-2af932e64c19.png)
+          git clone https://github.com/jameshoo123/Expense_Tracker.git
+    
+2.   Move into the project directory on your local place.
 
-## Add expense
-![image](https://user-images.githubusercontent.com/87403901/161212611-77f45422-8f0e-45a6-962a-58f5d4b00259.png)
+          cd Expense_Tracker
+          
+3.   Install NPM packages are nescessary for this service.
 
-## Edit expense
-![image](https://user-images.githubusercontent.com/87403901/161212685-3f7329c0-ab66-40c7-9c09-be3b8eeff9e0.png)
+          npm install
+    
+4.   Create .env and add environment variables. (* Notice: The environment variables that need to be used are listed in .env.example !)
 
-## Delete reminder
-![image](https://user-images.githubusercontent.com/87403901/161612654-07fc1a26-987d-49d4-a61f-c2802ce71dbb.png)
+          touch .env
+          
+5.   Create seed data. (* Notice: Don't forget to apply [MongoDB Atlas](https://www.mongodb.com/) account and setting .env for directly using online noSQL database)
 
+          npm run seed
+          
+6.   Now you can start the service on your local device.
+
+          npm run start
+          
+          or
+          
+          node app.js
+          
+9.   Start exploring >>> [Expense Tracker](http://localhost:3000/) <<< on your browser.
+
+# Continue to develop Expense Tracker
+*   Make sure that you have already installed [Node.js](https://nodejs.org/en/)
+1.   Don't forget to install [nodemon](https://www.npmjs.com/package/nodemon) to make your development process smoother.
+        
+          npm install -g nodemon
+    
+2.   Now you can start the service on your local device.
+
+          npm run dev
+          
+          or
+          
+          nodemon app.js
+          
+3.   Start exploring >>> [Expense Tracker](http://localhost:3000/) <<< on your browser.
+
+***
+# Seed user accounts
+> Account: user1  
+> Email: user1@example.com  
+> Password: 12345678  
+
+> Account: user2  
+> Email: user2@example.com  
+> Password: 12345678  
+
+***
 # Features
 1. Register your own account or using your facebook/google account directly to start create your expense list
 2. All expenses will be summaried on the main page, you can edit or delete them.
-3. Search the expenses by categories.
+3. Search the expenses by categories or months.
+          
+***
+# Web interface
+## Register page
+![image](https://user-images.githubusercontent.com/87403901/173330784-69130dee-2603-47dc-b5e0-6ce9458ef322.png)
 
-# Installation
-Using terminal with git clone to download this web application to your local directory.
+## Login page
+![image](https://user-images.githubusercontent.com/87403901/173330961-6e982a15-70d1-4872-b931-b91b584b3077.png)
 
-    git clone https://github.com/jameshoo123/AC3_A3_expense-tracker.git
+## Main page
+![image](https://user-images.githubusercontent.com/87403901/173331247-8a2e7825-2654-4594-8fb4-df07d4d947e3.png)
 
-Change the working directory 
+## Add expense
+![image](https://user-images.githubusercontent.com/87403901/173331863-9eb979b6-b5de-4eca-8e8f-c51efdf4a767.png)
 
-    cd AC3_A3_expense-tracker
+## Edit expense
+![image](https://user-images.githubusercontent.com/87403901/173331800-078ff25e-81ed-4699-8a32-a3c0c70464df.png)
 
-Install Node.js (you need to download and install the "nvm" from https://github.com/coreybutler/nvm-windows/releases for the following installation)
+## Delete reminder
+![image](https://user-images.githubusercontent.com/87403901/173331413-3d17924a-9ca0-488e-8585-32b3614b1f36.png)
 
-    nvm install 14.16.0
-
-Install npm modules for this project.
-
-    npm install
-
-# Quick start
-Start this web application
-
-    npm run start
-
-# Development
-Install nodemon
-
-    npm install -g nodemon
     
-Install npm modules for this project.
-
-    npm install
-
-Start project development
-
-    npm run dev
-    
+***
 # Development tools
 * Node.js 14.16.0
 * Bootstrap 5.1.3
 * popperjs 2.10.2
 * Font-awesome 6.1.1
 
+***
 # Contributor
 [jameshoo123](https://github.com/Azure/azure-content/blob/master/contributor-guide/contributor-guide-index.md)
 
