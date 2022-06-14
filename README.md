@@ -1,6 +1,8 @@
 # Expense Tracker
 A web application for recording your daily expenses.
 
+![14 06 2022_11 07 18_REC](https://user-images.githubusercontent.com/87403901/173485283-14a59d36-4a37-40b7-bdca-4b64d8630864.gif)
+
 ***
 # Start to use Expense Tracker
 *   Make sure that you have already installed [Node.js](https://nodejs.org/en/)
