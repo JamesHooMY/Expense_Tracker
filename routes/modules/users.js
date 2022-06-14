@@ -24,34 +24,38 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', async (req, res) => {
-  const { name, email, password, confirmPassword } = req.body
-  const errors = []
-  if (password !== confirmPassword) {
-    errors.push({ message: '密碼與確認密碼不符 !' })
-    return res.render('register', {
-      errors,
-      name,
-      email,
-      password,
-      confirmPassword,
-    })
-  }
+  try {
+    const { name, email, password, confirmPassword } = req.body
+    const errors = []
+    if (password !== confirmPassword) {
+      errors.push({ message: '密碼與確認密碼不符 !' })
+      return res.render('register', {
+        errors,
+        name,
+        email,
+        password,
+        confirmPassword,
+      })
+    }
 
-  const user = await User.findOne({ email })
-  if (user) {
-    errors.push({ message: '這個 email 已經被注冊過了 !' })
-    return res.render('register', {
-      errors,
-      name,
-      email,
-      password,
-      confirmPassword,
-    })
-  } else {
-    const hash = bcrypt.hashSync(password, 10)
-    await User.create({ name, email, password: hash })
+    const user = await User.findOne({ email })
+    if (user) {
+      errors.push({ message: '這個 email 已經被注冊過了 !' })
+      return res.render('register', {
+        errors,
+        name,
+        email,
+        password,
+        confirmPassword,
+      })
+    } else {
+      const hash = bcrypt.hashSync(password, 10)
+      await User.create({ name, email, password: hash })
+    }
+    res.redirect('/users/login')
+  } catch (err) {
+    console.error(err)
   }
-  res.redirect('/users/login')
 })
 
 router.get('/logout', (req, res) => {
@@ -65,45 +69,49 @@ router.get('/changePassword', authenticator, (req, res) => {
 })
 
 router.put('/changePassword', authenticator, async (req, res) => {
-  const { oldPassword, newPassword, confirmNewPassword } = req.body
-  const errors = []
-  if (oldPassword === newPassword) {
-    errors.push({ message: '新密碼不能與舊密碼相同 !' })
-    return res.render('changePassword', {
-      errors,
-      oldPassword,
-      newPassword,
-      confirmNewPassword,
-    })
-  }
-  if (newPassword !== confirmNewPassword) {
-    errors.push({ message: '新密碼與與新確認密碼不符 !' })
-    return res.render('changePassword', {
-      errors,
-      oldPassword,
-      newPassword,
-      confirmNewPassword,
-    })
-  }
+  try {
+    const { oldPassword, newPassword, confirmNewPassword } = req.body
+    const errors = []
+    if (oldPassword === newPassword) {
+      errors.push({ message: '新密碼不能與舊密碼相同 !' })
+      return res.render('changePassword', {
+        errors,
+        oldPassword,
+        newPassword,
+        confirmNewPassword,
+      })
+    }
+    if (newPassword !== confirmNewPassword) {
+      errors.push({ message: '新密碼與與新確認密碼不符 !' })
+      return res.render('changePassword', {
+        errors,
+        oldPassword,
+        newPassword,
+        confirmNewPassword,
+      })
+    }
 
-  const userId = req.user._id
-  const user = await User.findOne({ _id: userId })
-  const isMatch = await bcrypt.compare(oldPassword, user.password)
-  if (!isMatch) {
-    errors.push({ message: '舊密碼不正確 !' })
-    return res.render('changePassword', {
-      errors,
-      oldPassword,
-      newPassword,
-      confirmNewPassword,
-    })
-  }
+    const userId = req.user._id
+    const user = await User.findOne({ _id: userId })
+    const isMatch = await bcrypt.compare(oldPassword, user.password)
+    if (!isMatch) {
+      errors.push({ message: '舊密碼不正確 !' })
+      return res.render('changePassword', {
+        errors,
+        oldPassword,
+        newPassword,
+        confirmNewPassword,
+      })
+    }
 
-  const hash = bcrypt.hashSync(newPassword, 10)
-  await User.findOneAndUpdate({ _id: userId }, { password: hash }) // update password
-  req.logout()
-  req.flash('success_msg', '密碼更換成功，請重新登入後再使用！')
-  res.redirect('/users/login')
+    const hash = bcrypt.hashSync(newPassword, 10)
+    await User.findOneAndUpdate({ _id: userId }, { password: hash }) // update password
+    req.logout()
+    req.flash('success_msg', '密碼更換成功，請重新登入後再使用！')
+    res.redirect('/users/login')
+  } catch (err) {
+    console.error(err)
+  }
 })
 
 router.get('/forgetPassword', (req, res) => {

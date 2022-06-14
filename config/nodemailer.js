@@ -16,7 +16,6 @@ module.exports = async (userEmail, verifiedCode) => {
       from: process.env.NODEMAILER_USER, // sender address
       to: userEmail, // list of receivers
       subject: '記帳本忘記密碼', // Subject line
-      text: 'Hello world?', // plain text body
       html: `<b>驗證碼 ${verifiedCode}</b>`, // html body
     }
 
