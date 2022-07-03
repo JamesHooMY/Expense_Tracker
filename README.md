@@ -96,6 +96,7 @@ A web application for recording your daily expenses.
 * Bootstrap 5.1.3
 * popperjs 2.10.2
 * Font-awesome 6.1.1
+* MySQL 8.0.15
 
 ***
 # Contributor
